@@ -17,7 +17,7 @@ def export_mp3_parts(filename, audio):
 	split_sound = sound_split(audio)
 	
 	for part in range(len(split_sound)):
-		split_sound[part].export(filename[0:-3] + str(part) + "mp3")
+		split_sound[part].export(filename[0:-4] + str(part) + ".mp3")
 
 for fil in files_to_convert:
 	print fil
