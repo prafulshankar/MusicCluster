@@ -2,10 +2,14 @@ import midi
 import sys
 import pydub
 import os
+import scipy
 
 # convert all files in directory to split mp3s
 directory_name = sys.argv[1]
 print directory_name
+
+if directory_name[-1] != "/":
+    directory_name += "/"
 
 files_to_conv = os.listdir(directory_name)
 files_to_convert = [each for each in files_to_conv if each[-3:]=="mp3"]
@@ -21,7 +25,8 @@ def export_mp3_parts(destfile, audio):
     split_sound = song_split(audio)
         
     for part in range(len(split_sound)):
-        split_sound[part].export(destfile[0:-4] + "_" + str(part+1) + ".mp3")
+        split_sound[part].export(destfile[0:-4] + "_" + str(part+1) + ".wav",
+            format = "wav")
 
 for fil in files_to_convert:
     path = directory_name + fil[0:-4]
@@ -31,4 +36,5 @@ for fil in files_to_convert:
     dest_fil = path + "/" + fil
     print source_fil, dest_fil
     mp3_audio = pydub.AudioSegment.from_file(source_fil, "mp3")
+    
     export_mp3_parts(dest_fil, mp3_audio)
