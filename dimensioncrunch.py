@@ -2,8 +2,8 @@ from parser import *
 
 songs = parse('*/*/*.wav')
 
-songToParse = songs[0]
-kparam = 2
+songToParse = songs[5]
+kparam = 16
 for i in range(len(songToParse)/kparam):
     acc = [0,0]
     for j in range(kparam):
